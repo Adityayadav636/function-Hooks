@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, {useState, useEffect } from 'react';
 
 
 function App() {
 
-  const [count, setCount] = useState(0);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then(response => response.json())
+      .then(data => setData(data));
+  }, []);
 
   return (
     <div style={{margin : "50px"}}>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
+      <p>{data ? data.title : 'Loading...'}</p>
     </div>
   );
 }
