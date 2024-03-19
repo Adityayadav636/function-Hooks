@@ -1,20 +1,31 @@
-import React, {useState, useEffect } from 'react';
+// import React, { useState } from "react";
+// import C1 from './c1';
 
+// function App() {
+//   const [user, setUser] = useState("I am Aditya");
+
+//   return (
+//     <C1 user={user} />
+//   );
+// }
+
+// export default App;
+
+
+
+
+import React, { useState, createContext } from "react";
+import C1 from './c1';
+
+export const UserContext = createContext(); // Export UserContext
 
 function App() {
-
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/todos/1')
-      .then(response => response.json())
-      .then(data => setData(data));
-  }, []);
+  const [user, setUser] = useState("I am A");
 
   return (
-    <div style={{margin : "50px"}}>
-      <p>{data ? data.title : 'Loading...'}</p>
-    </div>
+    <UserContext.Provider value={user}>
+      <C1 />
+    </UserContext.Provider>
   );
 }
 
